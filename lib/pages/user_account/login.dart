@@ -1,8 +1,8 @@
-import 'package:onboarding/composed_widjet/logo_text.dart';
+import 'package:onboarding/awidjet/logo_text.dart';
 import 'package:onboarding/custom_color/custom_color.dart';
-import 'package:onboarding/custom_widjet/SingnUp.dart';
-import 'package:onboarding/custom_widjet/raised_button.dart';
-import 'package:onboarding/custom_widjet/text_field.dart';
+import 'package:onboarding/awidjet/SingnUp.dart';
+import 'package:onboarding/awidjet/raised_button.dart';
+import 'package:onboarding/awidjet/text_field.dart';
 import 'package:onboarding/methods/Methods.dart';
 import 'package:onboarding/pages/user_account/sign_up.dart';
 import 'package:flutter/cupertino.dart';
@@ -31,21 +31,20 @@ class LoginScreenState extends State<LoginScreen>{
     //Future<String> users;
   LoginScreenState() {
     //_getMobileNumber();
-    this.userName.text=CommonData.mobileNumber;
+    this.userName.text=CommonData.userName;
+    this.password.text='123joni';
 
   }
-
-
     _getMobileNumber() async{
       SharedPreferences prefs =  await SharedPreferences.getInstance();
-      String mobileNumber=prefs.getString('mobileNumber')??null;
+      String mobileNumber=prefs.getString('userName')??null;
       this.userName.text=mobileNumber;
       return mobileNumber;
     }
 
-  _saveMobileNumber(String mobileNumber) async {
+  _saveMobileNumber(String userName) async {
     SharedPreferences prefs =  await SharedPreferences.getInstance();
-    prefs.setString('mobileNumber', mobileNumber);
+    prefs.setString('userName', userName);
   }
 
   String gotoHomeScreen(){
@@ -73,7 +72,7 @@ class LoginScreenState extends State<LoginScreen>{
                 if(this.userName.text.isEmpty)
                   Container(
                     padding: EdgeInsets.all(10.0),
-                    child: UserInputTextField(userName,'Please enter Mobile/emil Id'),
+                    child: EditTextForSingUp(userName,'Please enter Mobile/emil Id'),
                   ),
                 Container(
                   padding: EdgeInsets.all(10.0),
@@ -128,7 +127,7 @@ class LoginScreenState extends State<LoginScreen>{
       body: jsonEncode(<String, String>
       {
         "userName": this.userName.text,
-        "password": this.password.text
+        "password": '123joni'
       }
       ),
     );
@@ -136,8 +135,8 @@ class LoginScreenState extends State<LoginScreen>{
       if(response.statusCode==200){
         Navigator.pop(context);
         var val=convert.jsonDecode(response.body);
-        if(val['mobileNumber']==userName.text||val['emil']==userName.text){
-          _saveMobileNumber(val['mobileNumber']);
+        if(val['userName']==userName.text){
+          _saveMobileNumber(val['userName']);
           CommonData.userData=UserData(val);
           Navigator.push(context, MaterialPageRoute(builder: (context)=>new LandingPage()));
         }

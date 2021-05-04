@@ -1,6 +1,6 @@
 import 'package:onboarding/CommonDate.dart';
 import 'package:onboarding/custom_color/custom_color.dart';
-import 'package:onboarding/composed_widjet/application_bar.dart';
+import 'package:onboarding/awidjet/application_bar.dart';
 import 'package:onboarding/pages/user_account/change_password.dart';
 import 'package:flutter/material.dart';
 

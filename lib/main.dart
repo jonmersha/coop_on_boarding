@@ -2,10 +2,7 @@ import 'package:onboarding/pages/customer_home.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
-
 import 'CommonDate.dart';
-
 
  void main(){
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,9 +10,9 @@ import 'CommonDate.dart';
 }
 _getMobileNumber() async{
   SharedPreferences prefs =  await SharedPreferences.getInstance();
-  String mobileNumber=prefs.getString('mobileNumber')??null;
-  CommonData.mobileNumber=mobileNumber;
-  return mobileNumber;
+  String userName=prefs.getString('userName')??null;
+  CommonData.userName=userName;
+  return userName;
 }
 class OnBoardingApp extends StatelessWidget {
   @override
@@ -28,11 +25,11 @@ class OnBoardingApp extends StatelessWidget {
       ),
     ),
     child: MaterialApp(
-    title: "hulluPay",
+    title: "Customer OnBoarding",
     theme: ThemeData(
     fontFamily: 'Arial'
     ),
-    home: CustomerHome(title:"hulluPay"),
+    home: CustomerHome(title:"Customer OnBoarding"),
     ),
   );
 

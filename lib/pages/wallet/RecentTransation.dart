@@ -37,7 +37,7 @@ class _RecentTransaction extends State<RecentTransaction>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
         body: jsonEncode(<String, String>
-        {"phoneNumber":CommonData.mobileNumber}
+        {"phoneNumber":CommonData.userName}
         ),
       );
       if(response.statusCode==200){

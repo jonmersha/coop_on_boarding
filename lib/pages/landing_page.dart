@@ -1,9 +1,9 @@
 
 import 'package:onboarding/CommonDate.dart';
-import 'package:onboarding/composed_widjet/image_avatar.dart';
-import 'package:onboarding/composed_widjet/tab.dart';
-import 'package:onboarding/custom_widjet/custom_text.dart';
-import 'package:onboarding/composed_widjet/application_bar.dart';
+import 'package:onboarding/awidjet/custom_text.dart';
+import 'package:onboarding/awidjet/image_avatar.dart';
+import 'package:onboarding/awidjet/tab.dart';
+import 'package:onboarding/awidjet/application_bar.dart';
 import 'package:flutter/material.dart';
 
 class LandingPage extends StatelessWidget {

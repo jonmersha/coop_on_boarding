@@ -1,42 +1,38 @@
  import 'package:shared_preferences/shared_preferences.dart';
 
 class CommonData{
-    static final String baseUrl='http://192.168.43.228:8080';
+    //static final String baseUrl='10.0.19.60:8080';
+    static final String baseUrl='http://10.1.11.102:8080';
     // static final String baseUrl='http://localhost:8080';
     static UserData userData;
-    static String mobileNumber;
+    static String userName;
 
     static const  double padding=5.0;
     static const  double iconSize=40.0;
 
     static  MobileNumber() async {
    SharedPreferences prefs =  await SharedPreferences.getInstance();
-   String mobileNumbers=prefs.getString('mobileNumber')??null;
-   mobileNumber=mobileNumbers;
+   String useN=prefs.getString('userName')??null;
+   userName=useN;
   // return mobileNumber;
   }
 
  }
 
  class UserData{
-  String mobileNumber;
+  String userName;
   String email;
   String firstName;
   String middleName;
-  String lastName;
-  double balance;
-  double bankBalance;
-  String language;
+  String branchCode;
+
 
   UserData(val){
-   this.mobileNumber=val['mobileNumber'];
-   this.email=val['email'];
+   this.userName=val['userName'];
    this.firstName=val['firstName'];
    this.middleName=val['middleName'];
-   this.lastName=val['lastName'];
-   this.balance=val['balance'];
-   this.language=val['language'];
-   this.bankBalance=0.0;
+   this.branchCode=val['branchCode'];
+
   }
 
 

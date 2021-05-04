@@ -21,7 +21,7 @@ class _CustomerHomeState extends State<CustomerHome> {
     CommonData.MobileNumber();
     return new SplashScreen(
       seconds: 3,
-      navigateAfterSeconds: new LandingPage(),
+      navigateAfterSeconds: new LoginScreen(),
     );
 
   }

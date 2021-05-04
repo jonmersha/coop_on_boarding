@@ -1,5 +1,8 @@
-import 'package:onboarding/pages/cuatomer_account/customer_1.dart';
-import 'package:onboarding/pages/cuatomer_account/customer_3.dart';
+
+import 'package:onboarding/pages/cuatomer_account/customerinfo/customer_1.dart';
+import 'package:onboarding/pages/cuatomer_account/customerinfo/customer_3.dart';
+import 'package:onboarding/pages/cuatomer_account/picture.dart';
+
 import 'package:onboarding/pages/wallet/custom_controls/Card.dart';
 
 import 'package:flutter/material.dart';
@@ -11,8 +14,7 @@ class CustomerMenu extends StatelessWidget {
     @required this.controller,
   }) : super(key: key);
   final TextEditingController controller;
-  balanceQuery(){
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -30,39 +32,18 @@ class CustomerMenu extends StatelessWidget {
 
           Padding(
             padding: const EdgeInsets.all(CommonData.padding),
-            child: CustomCard(CustomerCreateOne(),"Create Customer", "Various Reports",Colors.white,Colors.black,
+            child: CustomCard(CustomerCreateOne(),"Create Customer", "Various Reports",Colors.black,Colors.white,
                 Icon(Icons.featured_play_list),CommonData.iconSize),
           ),
 
-          Padding(
-            padding: const EdgeInsets.all(CommonData.padding),
-            child: CustomCard(CustomerCreateOne(),"Photo", "Various Reports",Colors.white,Colors.black,
-                Icon(Icons.featured_play_list),CommonData.iconSize),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(CommonData.padding),
-            child: CustomCard(CustomerCreateThree(),"Signature", "Various Reports",Colors.white,Colors.black,
-                Icon(Icons.featured_play_list),CommonData.iconSize),
-          ),
 
           Padding(
             padding: const EdgeInsets.all(CommonData.padding),
-            child: CustomCard(CustomerCreateThree(),"Add Account", "Various Reports",Colors.white,Colors.black,
+            child: CustomCard(MyApp(),"upload", "Select Image from",Colors.black,Colors.white,
                 Icon(Icons.featured_play_list),CommonData.iconSize),
           ),
 
-          Padding(
-            padding: const EdgeInsets.all(CommonData.padding),
 
-            child: CustomCard(CustomerCreateThree(),"view customers", "Customer List",Colors.white,Colors.black,
-                Icon(Icons.featured_play_list),CommonData.iconSize),
-          ),
-
-          Padding(
-            padding: const EdgeInsets.all(CommonData.padding),
-            child: CustomCard(CustomerCreateThree(),"Create Customer", "Various Reports",Colors.white,Colors.black,
-                Icon(Icons.featured_play_list),CommonData.iconSize),
-          ),
         ],);
       },
     );

@@ -1,11 +1,8 @@
-
-
-import 'package:onboarding/composed_widjet/logo_text.dart';
 import 'package:onboarding/custom_color/custom_color.dart';
-import 'package:onboarding/custom_widjet/SingnUp.dart';
-import 'package:onboarding/custom_widjet/custom_text.dart';
-import 'package:onboarding/custom_widjet/raised_button.dart';
-import 'package:onboarding/custom_widjet/text_field.dart';
+import 'package:onboarding/awidjet/SingnUp.dart';
+import 'package:onboarding/awidjet/custom_text.dart';
+import 'package:onboarding/awidjet/raised_button.dart';
+import 'package:onboarding/awidjet/text_field.dart';
 import 'package:onboarding/methods/Methods.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +13,7 @@ import 'dart:convert' as convert;
 import 'dart:convert';
 
 import '../../CommonDate.dart';
-import '../landing_page.dart';
+
 
 class SignUp extends StatefulWidget{
   SignUpState createState()=>SignUpState();
@@ -89,7 +86,7 @@ class SignUpState extends State<SignUp>{
                  // LogoText(),
                  // if(this.userName.text.isEmpty)
                   Container(
-                    padding: EdgeInsets.only(bottom: 20.0),
+                    padding: EdgeInsets.only(bottom: 10.0),
                     child: CustomText('Sign App',30.9,1.0,CustomColor.white,),),
                     Container(
                       // padding: EdgeInsets.all(5.0),
@@ -110,6 +107,14 @@ class SignUpState extends State<SignUp>{
                   Container(
                     // padding: EdgeInsets.all(5.0),
                     child: EditTextForSingUp(lastName,'Please enter last name'),
+                  ),
+                  Container(
+                    // padding: EdgeInsets.all(5.0),
+                    child: EditTextForSingUp(mobileNumber,'Teller Mobile'),
+                  ),
+                  Container(
+                    // padding: EdgeInsets.all(5.0),
+                    child: EditTextForSingUp(emailId,'email'),
                   ),
                   Container(
                     // padding: EdgeInsets.all(5.0),
@@ -142,7 +147,6 @@ class SignUpState extends State<SignUp>{
 
     );
   }
-
   void createAccount() async{
 
     Methods.showLoaderDialog(context,'SigningUp ......');
@@ -155,7 +159,7 @@ class SignUpState extends State<SignUp>{
       {
         "employeeId": this.employeeId.text,
         "branchCode": this.branchCode.text,
-        "emailId": this.employeeId.text,
+        "emailId": this.emailId.text,
         "mobileNumber": this.mobileNumber.text,
         "firstName": this.firstName.text,
         "middleName": this.middleName.text,
@@ -171,15 +175,29 @@ class SignUpState extends State<SignUp>{
       if(response.statusCode==200){
         Navigator.pop(context);
         var val=convert.jsonDecode(response.body);
-
+        if(val['status']=='Success')
           AwesomeDialog(
+            context: context,
+            dialogType: DialogType.SUCCES,
+            animType: AnimType.BOTTOMSLIDE,
+            title: val['status'],
+            desc: val['messageBody'],
+
+            btnOkOnPress:(){
+              Navigator.pop(context);
+            } ,
+          ).show();
+        else
+        AwesomeDialog(
             context: context,
             dialogType: DialogType.ERROR,
             animType: AnimType.BOTTOMSLIDE,
-            title: 'Login Error',
-            desc: 'User name or password is not correct',
-            btnCancelOnPress:(){} ,
+          title: val['status'],
+          desc: val['messageBody'],
+          btnCancelOnPress:(){} ,
           ).show();
+
+
 
 
 
@@ -187,8 +205,6 @@ class SignUpState extends State<SignUp>{
       }
     );
   }
-
-
   void _togglePasswordView() {
     setState(() {
       _isHidden = !_isHidden;

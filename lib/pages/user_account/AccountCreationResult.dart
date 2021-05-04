@@ -1,18 +1,11 @@
-
-
-
-
 import 'dart:convert';
-
 import 'dart:convert' as convert;
-
-
-
-import 'package:onboarding/custom_widjet/SingnUp.dart';
+import 'package:onboarding/awidjet/SingnUp.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:http/http.dart' as http;
+
+
 
 class AccountCreationResult extends StatefulWidget{
   AccountCreationResultState createState()=>AccountCreationResultState();

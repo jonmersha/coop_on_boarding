@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'dart:convert' as convert;
 
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:onboarding/composed_widjet/application_bar.dart';
+import 'package:onboarding/awidjet/application_bar.dart';
 import 'package:onboarding/custom_color/custom_color.dart';
-import 'package:onboarding/custom_widjet/raised_button.dart';
-import 'package:onboarding/custom_widjet/text_field.dart';
+import 'package:onboarding/awidjet/raised_button.dart';
+import 'package:onboarding/awidjet/text_field.dart';
 import 'package:onboarding/methods/Methods.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -22,9 +22,6 @@ class _changePasstate extends State<ChangePass> {
   final oldPassword = TextEditingController();
   final newPassword = TextEditingController();
   final conformPassword = TextEditingController();
-  // final comment = TextEditingController();
-  // final receiverFullName = TextEditingController();
-
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +110,7 @@ class _changePasstate extends State<ChangePass> {
       },
       body: jsonEncode(<String, String>
       {
-        "phoneNumber": CommonData.mobileNumber,
+        "phoneNumber": CommonData.userName,
         "oldPass": oldPassword.text,
         "newPass": newPassword.text,
         "newPassConfirm": conformPassword.text

@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:onboarding/CommonDate.dart';
 import 'package:onboarding/custom_color/custom_color.dart';
-import 'package:onboarding/custom_widjet/custom_text.dart';
-import 'package:onboarding/custom_widjet/flat_button.dart';
+import 'package:onboarding/awidjet/custom_text.dart';
+import 'package:onboarding/awidjet/flat_button.dart';
 import 'package:onboarding/methods/Methods.dart';
 import 'package:flutter/material.dart';
 
@@ -35,8 +35,8 @@ class CustomCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(2.0),
         child: Card(
-          elevation: .2,
-          // color:CustomColor.semi,
+          elevation: 10.2,
+           color:CustomColor.black,
            shadowColor: CustomColor.cyan_blue,
           borderOnForeground: true,
 
@@ -202,16 +202,15 @@ class _HeaderCardState extends State<HeaderCard> {
          'Content-Type': 'application/json; charset=UTF-8',
        },
        body: jsonEncode(<String, String>
-       {"phoneNumber":CommonData.mobileNumber}
+       {"phoneNumber":CommonData.userName}
        ),
      );
      setState(() {
        if(response.statusCode==200){
          Navigator.pop(context);
          var val=convert.jsonDecode(response.body);
-         CommonData.userData.balance=val['balance'];
+       //  CommonData.userData.balance=val['balance'];
          this.widget.balance=val['balance'];
-
            AwesomeDialog(
              context: context,
              dialogType: DialogType.SUCCES,
