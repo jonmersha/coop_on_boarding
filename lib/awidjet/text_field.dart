@@ -20,7 +20,7 @@ class CustomEditText extends StatelessWidget {
           //obscureText: true,
             cursorColor: CustomColor.white,
             style: TextStyle(
-                color: Colors.white,
+                color: Colors.black,
                 fontSize: 16.0
             ),
             controller: controller,
@@ -30,22 +30,22 @@ class CustomEditText extends StatelessWidget {
 
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(4)),
-                borderSide: BorderSide(width: 1,color: Colors.white),
+                borderSide: BorderSide(width: 1,color: Colors.black),
               ),
               disabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(4)),
-                borderSide: BorderSide(width: 1,color: Colors.white),
+                borderSide: BorderSide(width: 1,color: Colors.black),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(4)),
-                borderSide: BorderSide(width: 1,color: Colors.white),
+                borderSide: BorderSide(width: 1,color: Colors.black),
               ),
-              icon: Icon(Icons.person,color: Colors.white),
+              icon: Icon(Icons.person,color: Colors.black),
               labelText: hintText,
-              labelStyle: TextStyle(color: Colors.white),
+              labelStyle: TextStyle(color: Colors.black),
               border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(4)),
-                  borderSide: new BorderSide(color: Colors.white)
+                  borderSide: new BorderSide(color: Colors.black)
               ),
             )
 

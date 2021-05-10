@@ -1,5 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:onboarding/CommonDate.dart';
+import 'package:onboarding/awidjet/CustomDropDown.dart';
 import 'package:onboarding/awidjet/application_bar.dart';
 import 'package:onboarding/awidjet/dropdown_menu.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,15 +23,15 @@ class _CustomerBankAccountState extends State<CustomerBankAccount> {
 
   int productType;
   String currency;
-  List<Item> productTypeList = <Item>[
-    const Item('Product Type',0),
-    const Item('Saving',600),
+  List<IntegerValue> productTypeList = <IntegerValue>[
+    const IntegerValue('Product Type',0),
+    const IntegerValue('Saving',600),
   ];
-  List<Item> currencyList = <Item>[
-    const Item('Select Currency',0),
-    const Item('ETB',1),
-    const Item('USD',2),
-    const Item('URO',3),
+  List<StringValue> currencyList = <StringValue>[
+    const StringValue('Select Currency',''),
+    const StringValue('Ethiopian Birr','ETB'),
+    const StringValue('USA Dollar','USD'),
+    const StringValue('Uropian URO','URO'),
 
   ];
 var _data;
@@ -55,11 +56,11 @@ var _data;
               children: [
                 Container(
                   padding: EdgeInsets.all(15.0),
-                  child: MyDropDown(getCurrency,currencyList,200),
+                  child: DropDownStringValue(getCurrency,currencyList,200),
                 ),
                 Container(
                   padding: EdgeInsets.all(15.0),
-                  child: MyDropDownNumeric(getProductType,productTypeList,203),
+                  child: DropDownIntegerValue(getProductType,productTypeList,203),
                 ),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 20),

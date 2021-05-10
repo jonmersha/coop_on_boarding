@@ -2,10 +2,12 @@
 
 class CommonData{
     //static final String baseUrl='10.0.19.60:8080';
-    static final String baseUrl='http://10.1.11.102:8080';
+    // static final String baseUrl='http://10.1.11.102:8080';
+    static final String baseUrl='http://192.168.43.228:8080';
     // static final String baseUrl='http://localhost:8080';
     static UserData userData;
     static String userName;
+    static String passWord;
 
     static const  double padding=5.0;
     static const  double iconSize=40.0;
@@ -25,7 +27,6 @@ class CommonData{
   String firstName;
   String middleName;
   String branchCode;
-
 
   UserData(val){
    this.userName=val['userName'];

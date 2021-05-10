@@ -100,11 +100,10 @@ class _CustomerDetailInformationState extends State<CustomerDetailInformation> {
                     data:_data,
                     value: _data['accountNumber'],
                     commandText: 'Create Bank Account Number',
-
                 ),
 
-                compositeTextNull(
-                  title: 'Signature Name file Name',
+                compositeTextImage(
+                  title: 'Signature file Name',
                   value: _data['signatureImageName'],
                   commandText: 'Create Signature Name',
                   titleSize: 16,
@@ -115,7 +114,7 @@ class _CustomerDetailInformationState extends State<CustomerDetailInformation> {
                     function: captureImage
                 ),
 
-                compositeTextNull(
+                compositeTextImage(
                     title: 'Photo Name',
                     titleSize: 16,
                     textSize: 12,
@@ -138,7 +137,7 @@ class _CustomerDetailInformationState extends State<CustomerDetailInformation> {
                       titleSize: 16.0,
                       textSize: 12,
                         func:uploadImage,
-                      type:'SIGNATURES',
+                        type:'SIGNATURES',
                         data:_data,
                     ),
                     compositeTextBoolean(
@@ -175,32 +174,33 @@ class _CustomerDetailInformationState extends State<CustomerDetailInformation> {
     );
   }
   captureImage(type,data) async {
-
-
-    Methods.showLoaderDialog(context,'Creating Ban Account...');
+    print('Capture  Image');
+    String path=CommonData.baseUrl+'/onboarding/image/capture';
+    print(path);
+    Methods.showLoaderDialog(context,'Capture Image...');
     final http.Response response = await http.post(
-      Uri.parse(CommonData.baseUrl+'/onboarding/account/create'),
+      Uri.parse(CommonData.baseUrl+'/onboarding/image/capture'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: convert.jsonEncode(<String, String>
       {
         "imageType": type,
-        "accountNumber": data['accountNumber'],
-        "shortDescription": data['firstName'],
+        "accountNumber": _data['accountNumber'],
+        "shortDescription": _data['firstName'],
         "description": type+ "Image",
-        "transactionId":data['transactionId'],
+        "transactionId":_data['transactionId'],
+       "imageName":data
+
+
 
       }
       ),
     );
     setState(() {
       if(response.statusCode==200){
-
-
         Navigator.pop(context);
         var val=convert.jsonDecode(response.body);
-
         AwesomeDialog(
           context: context,
           dialogType: DialogType.SUCCES,
@@ -212,17 +212,10 @@ class _CustomerDetailInformationState extends State<CustomerDetailInformation> {
 
       }
     });
-
-
-
-
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context)=>new ImaheUploadCoreSystem(type,data)),
-    );
-
-
-
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(builder: (context)=>new ImaheUploadCoreSystem(type,data)),
+    // );
   }
 
 
@@ -268,7 +261,10 @@ class _CustomerDetailInformationState extends State<CustomerDetailInformation> {
             )));
   }
   Widget elevatedButton(
-      {Function function,var data, var command, Color buttonColorText = Colors
+      {Function function,
+        var data,
+        var command,
+        Color buttonColorText = Colors
           .white, type,}) {
     return ElevatedButton(
         style:
@@ -292,7 +288,7 @@ class _CustomerDetailInformationState extends State<CustomerDetailInformation> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        if(value != null)
+         if(value != null)
           titleText(title, titleSize, titleColor),
         Padding(
             padding: const EdgeInsets.only(left: 20.0, bottom: 5, right: 20.0),
@@ -352,6 +348,26 @@ class _CustomerDetailInformationState extends State<CustomerDetailInformation> {
       ],
     );
   }
+
+
+
+  Widget compositeTextImage(
+      {
+        var title, double titleSize = 16, Color titleColor = Colors
+          .white, Color textColor = Colors
+          .white, double textSize = 12, var value, var commandText, Function function,var data, String type}) {
+    if(value==null)
+    value='image Not Uploaded';
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+          titleText(title, titleSize, titleColor),
+          valueText(value: value, textSize: textSize, textColor: textColor),
+          elevatedButton(function: function,data:data, command: commandText,type: type)
+      ],
+    );
+  }
+
 
 
 }

@@ -1,5 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:onboarding/CommonDate.dart';
+import 'package:onboarding/awidjet/CustomDropDown.dart';
 import 'package:onboarding/awidjet/application_bar.dart';
 import 'package:onboarding/awidjet/dropdown_menu.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,10 +24,10 @@ class _ImaheUploadCoreSystemState extends State<ImaheUploadCoreSystem> {
 
   int productType;
   String type;
-  List<Item> imageType = <Item>[
-    const Item('Select Image Type ',0),
-    const Item('PHOTOS',1),
-    const Item('SINATURES',2),
+  List<IntegerValue> imageType = <IntegerValue>[
+    const IntegerValue('Select Image Type ',0),
+    const IntegerValue('PHOTOS',1),
+    const IntegerValue('SINATURES',2),
 
 
   ];
@@ -53,7 +54,7 @@ class _ImaheUploadCoreSystemState extends State<ImaheUploadCoreSystem> {
               children: [
                 Container(
                   padding: EdgeInsets.all(15.0),
-                  child: MyDropDown(getImageType,imageType,200),
+                  child: DropDownIntegerValue(getImageType,imageType,200),
                 ),
 
                 Container(

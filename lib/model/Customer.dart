@@ -24,10 +24,11 @@ class Customer{
 }
 
 class BankCustomer{
+
    String cashierCode;
    String cashierPassword;
    String title;
-  String firstName;
+    String firstName;
    String middleName;
    String lastName;
    String maritalStatus;
@@ -42,10 +43,16 @@ class BankCustomer{
    String streetName;
    String poBox;
    String address;
+
    String country;
+   String countryName;
+
    int sector;
+   String sectorName;
    int industry;
+   String industryName;
    int target;
+   String targetName;
    String idNumber;
    String documentName;
    String nameOnDocument;

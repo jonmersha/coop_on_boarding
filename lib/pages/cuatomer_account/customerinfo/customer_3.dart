@@ -54,7 +54,7 @@ final expirationMonth=TextEditingController();
         body: Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("images/onb_back.png"),
+               // image: AssetImage("images/onb_back.png"),
                 fit: BoxFit.cover,
               ),
             ),
@@ -90,9 +90,10 @@ final expirationMonth=TextEditingController();
                     child: CustomText("Isseu Date", 15, 1.2, Colors.white)),
            Row(
              children: [
-               Expanded(child: UserInputTextField(issueYear,'Year')),
-               Expanded(child: UserInputTextField(issueMonth,'Month')),
                Expanded(child: UserInputTextField(issueDate,'Date')),
+               Expanded(child: UserInputTextField(issueMonth,'Month')),
+               Expanded(child: UserInputTextField(issueYear,'Year')),
+
              ],
            ),
         Container(
@@ -102,9 +103,10 @@ final expirationMonth=TextEditingController();
             child: CustomText("Expiration Date", 15, 1.2, Colors.white)),
            Row(
              children: [
-               Expanded(child: UserInputTextField(expirationYear,'Year')),
-               Expanded(child: UserInputTextField(expirationMonth,'Month')),
                Expanded(child: UserInputTextField(expirationDate,'Date')),
+               Expanded(child: UserInputTextField(expirationMonth,'Month')),
+               Expanded(child: UserInputTextField(expirationYear,'Year')),
+
              ],
            ),
 
@@ -133,8 +135,8 @@ final expirationMonth=TextEditingController();
     this.customer.nameOnDocument=nameOnDocument.text;
     this.customer.issueAuthority=issueAuthority.text;
 
-    this.customer.issueDate= issueYear.text+'-'+ issueMonth.text+'-'+issueDate.text;
-    this.customer.expirationDate=expirationYear.text+'-'+ expirationMonth.text+'-'+expirationDate.text;
+    this.customer.issueDate= issueYear.text+ issueMonth.text+issueDate.text;
+    this.customer.expirationDate=expirationYear.text+ expirationMonth.text+expirationDate.text;
 
     Navigator.push(
       context,

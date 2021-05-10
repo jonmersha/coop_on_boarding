@@ -1,5 +1,7 @@
 
 
+import 'package:onboarding/CommonDate.dart';
+import 'package:onboarding/awidjet/CustomDropDown.dart';
 import 'package:onboarding/awidjet/application_bar.dart';
 import 'package:onboarding/awidjet/custom_text.dart';
 import 'package:onboarding/awidjet/dropdown_menu.dart';
@@ -39,30 +41,36 @@ class _BalanceEnqueryState extends State<CustomerCreateOne> {
   final officeTelNumber=TextEditingController();
   final emailId=TextEditingController();
 
+  int yearDOB;
+
+
   String cutomerTitile;
 
   String customerMaritalStatus;
 
 
-  List<Item> genderType = <Item>[
-    const Item('Gender',0),
-    const Item('MALE',1),
-    const Item('FEMALE',2),
+  List<StringValue> genderType = <StringValue>[
+    const StringValue('Gender','Gender'),
+    const StringValue('MALE','MALE'),
+    const StringValue('FEMALE','FEMALE'),
 
   ];
-  List<Item> titleType = <Item>[
-    const Item('Title',0),
-    const Item('MR',1),
-    const Item('MISSES',2),
+  List<StringValue> titleType = <StringValue>[
+    const StringValue('Title','Title'),
+    const StringValue('MR','MR'),
+    const StringValue('MISSES','MISSES'),
 
   ];
-  List<Item> maritalSt = <Item>[
-    const Item('Marital Status',0),
-    const Item('SINGLE',1),
-    const Item('MARRIED',2),
-    const Item('DIVORCED',3),
+  List<StringValue> maritalSt = <StringValue>[
+    const StringValue('Marital Status',''),
+    const StringValue('SINGLE','SINGLE'),
+    const StringValue('MARRIED','MARRIED'),
+    const StringValue('DIVORCED','DIVORCED'),
 
   ];
+
+
+  //List<int> yearList = generateNumberList(1900,2005);
 
 
 
@@ -111,13 +119,13 @@ class _BalanceEnqueryState extends State<CustomerCreateOne> {
                       children: [
 
                         Expanded(
-                            child: MyDropDown(getGeneder,genderType,103)),
+                            child: DropDownStringValue(getGeneder,genderType,103)),
                         Container(
                           width: 20,
                         ),
 
                         Expanded(
-                            child: MyDropDown(getTitile,titleType,98)),
+                            child: DropDownStringValue(getTitile,titleType,98)),
 
                       ],
                     ),
@@ -128,7 +136,7 @@ class _BalanceEnqueryState extends State<CustomerCreateOne> {
                     padding: const EdgeInsets.only(left: 15, top: 5.0),
                     child: Column(
                       children: [
-                        MyDropDown(getMaritalStatus,maritalSt,146),
+                        DropDownStringValue(getMaritalStatus,maritalSt,146),
                       ],
                     )),
 
@@ -136,12 +144,12 @@ class _BalanceEnqueryState extends State<CustomerCreateOne> {
                 Container(
                     alignment: Alignment.topLeft,
                     padding: EdgeInsets.only(left: 30,top: 8,bottom: 8),
-                    child: CustomText("Date of Birth", 15, 1.2, Colors.white)),
+                    child: CustomText("Date of Birth", 15, 1.2, Colors.black)),
                 Row(
                   children: [
-                    Expanded(child: UserInputTextField(dobYear,'Year')),
-                    Expanded(child: UserInputTextField(dobMonth,'Month')),
                     Expanded(child: UserInputTextField(dobDate,'Date')),
+                    Expanded(child: UserInputTextField(dobMonth,'Month')),
+                    Expanded(child: NumberList(getYear,generateNumberList(1920,2005),100)),
                   ],
                 ),
 
@@ -190,6 +198,11 @@ class _BalanceEnqueryState extends State<CustomerCreateOne> {
       cutomerTitile=title;
     });
   }
+  getYear(int year) {
+    setState(() {
+      this.yearDOB=year;
+    });
+  }
   getMaritalStatus(String maritalStatus) {
     setState(() {
       customerMaritalStatus=maritalStatus;
@@ -201,13 +214,15 @@ class _BalanceEnqueryState extends State<CustomerCreateOne> {
 
     //populating the customer data
     BankCustomer customer=new BankCustomer();
+    customer.cashierCode=CommonData.userName;
+    customer.cashierPassword=CommonData.passWord;
     customer.firstName=firstName.text;
     customer.middleName=middleName.text;
     customer.lastName=lastName.text;
     customer.title=title.text;
     customer.maritalStatus=customerMaritalStatus;
     customer.gender=gender;
-    customer.dob=dobYear.text+'-'+dobMonth.text+'-'+dobDate.text;
+    customer.dob=dobYear.text+dobMonth.text+dobDate.text;
     customer.mobilePhoneNumber=mobilePhoneNumber.text;
     customer.officeTelNumber=officeTelNumber.text;
     customer.emailId=emailId.text;
@@ -216,6 +231,14 @@ class _BalanceEnqueryState extends State<CustomerCreateOne> {
       context,
       MaterialPageRoute(builder: (context)=>CustomerCreateTwo(customer)),
     );
+  }
+
+  List<int> generateNumberList(start,end){
+    List<int> list=<int>[];
+    for(int i=start;i<=end;i++){
+      list.add(i);
+    }
+    return list;
   }
 
 }

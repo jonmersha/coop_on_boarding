@@ -98,7 +98,7 @@ class _UploadPageState extends State<UploadPage> {
 
   uploaddImageToserver(String text,File file,String url) async{
     print("Image upload started=========================");
-    var request=http.MultipartRequest("POST",Uri.parse('http://10.0.19.60:8080/ss'));
+    var request=http.MultipartRequest("POST",Uri.parse(CommonData.baseUrl+'/ss'));
         request.fields["file"]="text";
         var  pic=await http.MultipartFile.fromPath("file_field", file.path);
         request.files.add(pic);

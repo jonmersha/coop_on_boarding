@@ -138,6 +138,7 @@ class LoginScreenState extends State<LoginScreen>{
         if(val['userName']==userName.text){
           _saveMobileNumber(val['userName']);
           CommonData.userData=UserData(val);
+          CommonData.passWord=password.text;
           Navigator.push(context, MaterialPageRoute(builder: (context)=>new LandingPage()));
         }
         else{
