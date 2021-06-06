@@ -1,10 +1,8 @@
-
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:onboarding/awidjet/application_bar.dart';
 import 'package:onboarding/custom_color/custom_color.dart';
 import 'package:onboarding/methods/Methods.dart';
-import 'package:onboarding/pages/cuatomer_account/immage/ImmageUpload.dart';
 import 'package:onboarding/pages/customer_image/ImageProcessor.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
@@ -13,6 +11,7 @@ import '../../CommonDate.dart';
 import 'CustomerBankAccount.dart';
 class CustomerDetailInformation extends StatefulWidget{
   var data;
+
 
   CustomerDetailInformation(this.data);
   @override
@@ -32,12 +31,7 @@ class _CustomerDetailInformationState extends State<CustomerDetailInformation> {
             .buildPreferredSize(),
         body: Container(
             color: CustomColor.pageBack,
-            // decoration: BoxDecoration(
-            //   image: DecorationImage(
-            //     image: AssetImage("images/onb_back.png"),
-            //     fit: BoxFit.cover,
-            //   ),
-            // ),
+
             width: double.infinity,
             height: double.infinity,
             child: ListView(
@@ -128,29 +122,33 @@ class _CustomerDetailInformationState extends State<CustomerDetailInformation> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    compositeTextBoolean(
-                      title: 'Signature image',
-                      value: _data['signatureImageUploaded'],
-                      message: 'upload Signature',
-                      titleColor: Colors.black,
-                      textColor: Colors.black,
-                      titleSize: 16.0,
-                      textSize: 12,
-                        func:uploadImage,
-                        type:'SIGNATURES',
-                        data:_data,
+                    Expanded(
+                      child: compositeTextBoolean(
+                        title: 'Signature image',
+                        value: _data['signatureImageUploaded'],
+                        message: 'upload Signature',
+                        titleColor: Colors.black,
+                        textColor: Colors.black,
+                        titleSize: 16.0,
+                        textSize: 12,
+                          func:uploadImage,
+                          type:'SIGNATURES',
+                          data:_data,
+                      ),
                     ),
-                    compositeTextBoolean(
-                      title: 'Person Image',
-                      value: _data['customerImmageUploaded'],
-                      message: 'upload photo',
-                      titleColor: Colors.black,
-                      textColor: Colors.black,
-                      titleSize: 16.0,
-                      textSize: 12,
-                      func:uploadImage,
-                      type:'PHOTOS',
-                      data:_data
+                    Expanded(
+                      child: compositeTextBoolean(
+                        title: 'Person Image',
+                        value: _data['customerImmageUploaded'],
+                        message: 'upload photo',
+                        titleColor: Colors.black,
+                        textColor: Colors.black,
+                        titleSize: 16.0,
+                        textSize: 12,
+                        func:uploadImage,
+                        type:'PHOTOS',
+                        data:_data
+                      ),
                     ),
                   ],
                 ),
@@ -192,8 +190,6 @@ class _CustomerDetailInformationState extends State<CustomerDetailInformation> {
         "transactionId":_data['transactionId'],
        "imageName":data
 
-
-
       }
       ),
     );
@@ -207,15 +203,12 @@ class _CustomerDetailInformationState extends State<CustomerDetailInformation> {
           animType: AnimType.BOTTOMSLIDE,
           title: val['status'],
           desc: val['messageBody'],
-          btnCancelOnPress:(){} ,
+          btnOkOnPress:(){} ,
         ).show();
 
       }
     });
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(builder: (context)=>new ImaheUploadCoreSystem(type,data)),
-    // );
+
   }
 
 
@@ -335,21 +328,17 @@ class _CustomerDetailInformationState extends State<CustomerDetailInformation> {
         titleText(title, titleSize, titleColor),
         Padding(
             padding: const EdgeInsets.only(left: 20.0, bottom: 5),
-            child: (value
-                ? valueText(value: message, textSize: 12, textColor: titleColor)
-                : elevatedButton(
+            child: elevatedButton(
                 function: func,
                 type:type,
                 data:data,
                 command: message
             )
-            )
+            //)
         ),
       ],
     );
   }
-
-
 
   Widget compositeTextImage(
       {

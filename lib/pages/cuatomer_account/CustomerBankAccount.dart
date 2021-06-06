@@ -2,14 +2,12 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:onboarding/CommonDate.dart';
 import 'package:onboarding/awidjet/CustomDropDown.dart';
 import 'package:onboarding/awidjet/application_bar.dart';
-import 'package:onboarding/awidjet/dropdown_menu.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:onboarding/methods/Methods.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
-import 'package:onboarding/pages/cuatomer_account/customerinfo/customer_2.dart';
-
 
 class CustomerBankAccount extends StatefulWidget {
   var data;
@@ -28,15 +26,27 @@ class _CustomerBankAccountState extends State<CustomerBankAccount> {
 
 
   ];
-  List<IntegerValue> currencyList = <IntegerValue>[
-    const IntegerValue('Select Currency',0),
-    const IntegerValue('ETB',1),
-    const IntegerValue('USD',2),
-    const IntegerValue('URO',3),
+  List<StringValue> currencyList = <StringValue>[
+    const StringValue('Select Currency','ETB'),
+    const StringValue('Ethiopian BIrr','ETB'),
+    const StringValue('American Dollar','USD'),
+
 
   ];
 var _data;
   _CustomerBankAccountState(this._data);
+
+  getCurrency(String currency){
+    setState(() {
+      this.currency=currency;
+    });
+  }
+
+  getProductType(int productType) {
+    setState(() {
+      this.productType=productType;
+    });
+  }
 
 
   @override
@@ -57,7 +67,7 @@ var _data;
               children: [
                 Container(
                   padding: EdgeInsets.all(15.0),
-                  child: DropDownIntegerValue(getCurrency,currencyList,200),
+                  child: DropDownStringValue(getCurrency,currencyList,200),
                 ),
                 Container(
                   padding: EdgeInsets.all(15.0),
@@ -73,19 +83,10 @@ var _data;
 
   }
 
-  getCurrency(String currency){
-    setState(() {
-      this.currency=currency;
-    });
-  }
 
-  getProductType(int productType) {
-    setState(() {
-      this.productType=productType;
-    });
-  }
 
   createAccount()  async{
+    print('Currency:'+currency.toString());
 
     Methods.showLoaderDialog(context,'Creating Ban Account...');
     final http.Response response = await http.post(
@@ -99,15 +100,13 @@ var _data;
         "productCode": this.productType.toString(),
         "accountName": _data['firstName']+' '+_data['middleName']+' '+_data['lastName'],
         "shortName": _data['firstName'],
-        "currency": currency,
+        "currency": this.currency.toString(),
         "messageId": "AC123146"
       }
       ),
     );
     setState(() {
       if(response.statusCode==200){
-
-
         Navigator.pop(context);
         var val=convert.jsonDecode(response.body);
 
@@ -124,9 +123,7 @@ var _data;
     });
   }
 
-  createUser() {
 
-  }
 
 }
 

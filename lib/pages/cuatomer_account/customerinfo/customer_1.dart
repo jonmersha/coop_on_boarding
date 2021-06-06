@@ -1,10 +1,7 @@
-
-
 import 'package:onboarding/CommonDate.dart';
 import 'package:onboarding/awidjet/CustomDropDown.dart';
 import 'package:onboarding/awidjet/application_bar.dart';
 import 'package:onboarding/awidjet/custom_text.dart';
-import 'package:onboarding/awidjet/dropdown_menu.dart';
 import 'package:onboarding/awidjet/raised_button.dart';
 import 'package:onboarding/awidjet/text_field.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,41 +9,30 @@ import 'package:flutter/material.dart';
 import 'package:onboarding/model/Customer.dart';
 import 'package:onboarding/pages/cuatomer_account/customerinfo/customer_2.dart';
 
-
-
-
-
 class CustomerCreateOne extends StatefulWidget {
   @override
-  _BalanceEnqueryState createState() => _BalanceEnqueryState();
+  _BalanceEnquiryState createState() => _BalanceEnquiryState();
 }
 
-class _BalanceEnqueryState extends State<CustomerCreateOne> {
-
-
-
-
+class _BalanceEnquiryState extends State<CustomerCreateOne> {
   final firstName=TextEditingController();
   final middleName=TextEditingController();
   final lastName=TextEditingController();
 
-  final title=TextEditingController();
   String gender;
 
-
-  final dobYear=TextEditingController();
-  final dobMonth=TextEditingController();
-  final dobDate=TextEditingController();
   final mobilePhoneNumber=TextEditingController();
   final officeTelNumber=TextEditingController();
   final emailId=TextEditingController();
 
   int yearDOB;
-
-
-  String cutomerTitile;
-
+  String monthDOB;
+  String dateDOB;
+  String customerTitle;
   String customerMaritalStatus;
+
+
+
 
 
   List<StringValue> genderType = <StringValue>[
@@ -70,10 +56,6 @@ class _BalanceEnqueryState extends State<CustomerCreateOne> {
   ];
 
 
-  //List<int> yearList = generateNumberList(1900,2005);
-
-
-
   @override
   Widget build(BuildContext context) {
     String setOperationType(int type){
@@ -86,81 +68,79 @@ class _BalanceEnqueryState extends State<CustomerCreateOne> {
         resizeToAvoidBottomInset: true,
         appBar: APPBarChieledPage("Customer On-Boarding",'Customer Info 1 of 3').buildPreferredSize(),
         body: Container(
-            // decoration: BoxDecoration(
-            //   image: DecorationImage(
-            //     image: AssetImage("images/onb_back.png"),
-            //     fit: BoxFit.cover,
-            //   ),
-            // ),
+
             width: double.infinity,
             height: double.infinity,
             child: ListView(
-              padding: EdgeInsets.all(5.0),
+              padding: EdgeInsets.only(top: 20),
               children: [
                 Container(
-                   padding: EdgeInsets.all(5.0),
-                  child: UserInputTextField(firstName,'First Name'),
+                  padding: EdgeInsets.all(5.0),
+                  child: Row(
+                    children: [
+                             DropDownStringValue(getTitle,titleType,30),
+                      Expanded(
+                        child: UserInputTextField(firstName,'First Name'),
+                      ),
+                    ],
+                  ),
                 ),
+
                 Container(
                   padding: EdgeInsets.all(5.0),
                   child: UserInputTextField(middleName,'Middle Name'),
                 ),
                 Container(
-                 // alignment: Alignment.topLeft,
+
                   padding: EdgeInsets.all(5.0),
                   child: UserInputTextField(lastName,'Last Name'),
                 ),
                 Container(
-                  padding: EdgeInsets.all(15.0),
+                  padding: EdgeInsets.all(5.0),
                   child: Row(
-
-
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-
-                        Expanded(
-                            child: DropDownStringValue(getGeneder,genderType,103)),
-                        Container(
-                          width: 20,
-                        ),
-
-                        Expanded(
-                            child: DropDownStringValue(getTitile,titleType,98)),
-
+                        DropDownStringValue(getGender,genderType,50),
+                        DropDownStringValue(getMaritalStatus,maritalSt,90),
                       ],
                     ),
                 ),
-                Container(
-                    // padding: EdgeInsets.all(5.0),
-                    alignment: Alignment.topLeft,
-                    padding: const EdgeInsets.only(left: 15, top: 5.0),
-                    child: Column(
-                      children: [
-                        DropDownStringValue(getMaritalStatus,maritalSt,146),
-                      ],
-                    )),
-
 
                 Container(
                     alignment: Alignment.topLeft,
                     padding: EdgeInsets.only(left: 30,top: 8,bottom: 8),
-                    child: CustomText("Date of Birth", 15, 1.2, Colors.black)),
-                Row(
-                  children: [
-                    Expanded(child: UserInputTextField(dobDate,'Date')),
-                    Expanded(child: UserInputTextField(dobMonth,'Month')),
-                    Expanded(child: NumberList(getYear,generateNumberList(1920,2005),100)),
-                  ],
+                    child: CustomText("Date of Birth", 20, 1.2, Colors.black)),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(4),
+                        border: Border.all(width: 1.0, color: Colors.black)
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                            NumberList(getDate,generateNumberList(1,31),'Date',50),
+                        Text('/'),
+                            NumberList(getMonth,generateNumberList(1,12),'Month',50),
+                        Text('/'),
+                            NumberList(getYear,generateNumberList(1920,2005),'Year',50)
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                    padding: EdgeInsets.all(5.0),
+                  child: Row(
+                    children: [
+                      Expanded(child: UserInputTextField(mobilePhoneNumber,'Mobile Number')),
+                      Expanded(child:UserInputTextField(officeTelNumber,'Office Phone'))
+                    ],
+                  ),
                 ),
 
-                Container(
-                  padding: EdgeInsets.all(5.0),
-                  child: UserInputTextField(mobilePhoneNumber,'Mobile Number'),
-                ),
-                Container(
-                  padding: EdgeInsets.all(5.0),
-                  child: UserInputTextField(officeTelNumber,'Office Phone'),
-                ),
+
                 Container(
                   padding: EdgeInsets.all(5.0),
                   child: UserInputTextField(emailId,'Email Id'),
@@ -186,23 +166,34 @@ class _BalanceEnqueryState extends State<CustomerCreateOne> {
 
   }
 
-  void getGeneder(String operation){
+  void getGender(String operation){
     setState(() {
      gender=operation;
     });
   }
-
-
-  getTitile(String title) {
+  getTitle(String title) {
     setState(() {
-      cutomerTitile=title;
+      customerTitle=title;
     });
   }
+
   getYear(int year) {
     setState(() {
       this.yearDOB=year;
     });
   }
+  getMonth(int val) {
+    setState(() {
+      this.monthDOB=(val>9?val.toString():'0'+val.toString());
+    });
+  }
+  getDate(int val) {
+    setState(() {
+      this.dateDOB=(val>9?val.toString():'0'+val.toString());
+    });
+  }
+
+
   getMaritalStatus(String maritalStatus) {
     setState(() {
       customerMaritalStatus=maritalStatus;
@@ -219,14 +210,19 @@ class _BalanceEnqueryState extends State<CustomerCreateOne> {
     customer.firstName=firstName.text;
     customer.middleName=middleName.text;
     customer.lastName=lastName.text;
-    customer.title=title.text;
+    customer.title=customerTitle;
     customer.maritalStatus=customerMaritalStatus;
     customer.gender=gender;
-    customer.dob=dobYear.text+dobMonth.text+dobDate.text;
+
+
+
+    customer.dob= this.yearDOB.toString() +'-'+this.monthDOB+'-'+this.dateDOB;
+
+    //print(customer.title+' '+customer.dob);
+    //customer.dob= this.yearDOB.toString() +this.monthDOB.toString()+this.dateDOB.toString();
     customer.mobilePhoneNumber=mobilePhoneNumber.text;
     customer.officeTelNumber=officeTelNumber.text;
     customer.emailId=emailId.text;
-
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context)=>CustomerCreateTwo(customer)),

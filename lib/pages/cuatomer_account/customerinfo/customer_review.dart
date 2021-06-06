@@ -40,12 +40,6 @@ _BalanceEnqueryState(this._customer);
         resizeToAvoidBottomInset: true,
         appBar: APPBarChieledPage("Customer On-Boarding",'Review info').buildPreferredSize(),
         body: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                //image: AssetImage("images/onb_back.png"),
-                fit: BoxFit.cover,
-              ),
-            ),
 
             width: double.infinity,
             height: double.infinity,
@@ -66,23 +60,23 @@ _BalanceEnqueryState(this._customer);
                  CustomTextPair('Message Id',_customer.messageID,12, 1.2, Colors.black),
                  CustomTextPair('mnemonic',_customer.mnemonic,12, 1.2, Colors.black),
 
-                CustomTextPair('city',_customer.city,12, 1.2, Colors.black),
+                 CustomTextPair('city',_customer.city,12, 1.2, Colors.black),
 
                 CustomTextPair('streetName',_customer.streetName,12, 1.2, Colors.black),
-                CustomTextPair('poBox',_customer.poBox,12, 1.2, Colors.black),
-                CustomTextPair('address',_customer.address,12, 1.2, Colors.black),
-
-                CustomTextPair('country',_customer.countryName,12, 1.2, Colors.black),
-                CustomTextPair('sector',_customer.sectorName.toString(),12, 1.2, Colors.black),
-                CustomTextPair('industry',_customer.industryName.toString(),12, 1.2, Colors.black),
-                CustomTextPair('target',_customer.targetName.toString(),12, 1.2, Colors.black),
-
-                CustomTextPair('idNumber',_customer.idNumber,12, 1.2, Colors.black),
-                CustomTextPair('documentName',_customer.documentName,12, 1.2, Colors.black),
-                CustomTextPair('nameOnDocument',_customer.nameOnDocument,12, 1.2, Colors.black),
-                CustomTextPair('issueAuthority',_customer.issueAuthority,12, 1.2, Colors.black),
-                CustomTextPair('issueDate',_customer.issueDate,12, 1.2, Colors.black),
-                CustomTextPair('expirationDate',_customer.expirationDate,12, 1.2, Colors.black),
+                 CustomTextPair('poBox',_customer.poBox,12, 1.2, Colors.black),
+                 CustomTextPair('address',_customer.address,12, 1.2, Colors.black),
+                //
+                 CustomTextPair('country',_customer.country,12, 1.2, Colors.black),
+                 CustomTextPair('sector',_customer.sector.toString(),12, 1.2, Colors.black),
+                 CustomTextPair('industry',_customer.industry.toString(),12, 1.2, Colors.black),
+                 CustomTextPair('target',_customer.target.toString(),12, 1.2, Colors.black),
+                //
+                 CustomTextPair('idNumber',_customer.idNumber,12, 1.2, Colors.black),
+                 CustomTextPair('documentName',_customer.documentName,12, 1.2, Colors.black),
+                 CustomTextPair('nameOnDocument',_customer.nameOnDocument,12, 1.2, Colors.black),
+                 CustomTextPair('issueAuthority',_customer.issueAuthority,12, 1.2, Colors.black),
+                 CustomTextPair('issueDate',_customer.issueDate,12, 1.2, Colors.black),
+                 CustomTextPair('expirationDate',_customer.expirationDate,12, 1.2, Colors.black),
 
                   Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
@@ -108,6 +102,7 @@ _BalanceEnqueryState(this._customer);
 
 void createAccount() async{
 
+    print(this._customer.toJson());
   Methods.showLoaderDialog(context,'Customer Create Wait...');
   final http.Response response = await http.post(
     Uri.parse(CommonData.baseUrl+'/onboarding/customer/create'),

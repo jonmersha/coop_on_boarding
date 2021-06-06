@@ -63,7 +63,7 @@ class APPBarChieledPage extends StatelessWidget{
 
   PreferredSize buildPreferredSize() {
     return PreferredSize(
-      preferredSize:Size.fromHeight(90.0),
+      preferredSize:Size.fromHeight(120.0),
       child: AppBar(
         elevation: 10,
         backgroundColor: CustomColor.cyan_blue,

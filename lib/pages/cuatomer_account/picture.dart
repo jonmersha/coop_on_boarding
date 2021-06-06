@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter File Upload Example',
+      title: 'Image Upload',
       home: StartPage(),
     );
   }
@@ -26,7 +26,7 @@ class StartPage extends StatelessWidget {
     TextEditingController controller = TextEditingController();
     return Scaffold(
         appBar: AppBar(
-            title: Text('Flutter File Upload Example')
+            title: Text('Image Upload')
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),

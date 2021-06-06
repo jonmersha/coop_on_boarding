@@ -1,7 +1,7 @@
 
 
 
-import 'package:onboarding/awidjet/DateInput.dart';
+import 'package:onboarding/awidjet/CustomDropDown.dart';
 import 'package:onboarding/awidjet/application_bar.dart';
 import 'package:onboarding/awidjet/custom_text.dart';
 
@@ -38,6 +38,50 @@ final expirationDate=TextEditingController();
 final expirationYear=TextEditingController();
 final expirationMonth=TextEditingController();
 
+int yearGDDOB;
+String monthGDDOB;
+String dateDGDOB;
+
+
+int yearEXDOB;
+String monthEXDOB;
+String dateEXDOB;
+
+
+
+getYear(int year) {
+  setState(() {
+    this.yearGDDOB=year;
+  });
+}
+getMonth(int val) {
+  setState(() {
+    this.monthGDDOB=(val>9?val.toString():'0'+val.toString());
+  });
+}
+getDate(int val) {
+  setState(() {
+    this.dateDGDOB=(val>9?val.toString():'0'+val.toString());
+  });
+}
+
+
+getExYear(int year) {
+  setState(() {
+    this.yearEXDOB=year;
+  });
+}
+getExMonth(int val) {
+  setState(() {
+    this.monthEXDOB=(val>9?val.toString():'0'+val.toString());
+  });
+}
+getExDate(int val) {
+  setState(() {
+    this.dateEXDOB=(val>9?val.toString():'0'+val.toString());
+  });
+}
+
   @override
   Widget build(BuildContext context) {
     String setOperationType(int type){
@@ -52,12 +96,6 @@ final expirationMonth=TextEditingController();
         resizeToAvoidBottomInset: true,
         appBar: APPBarChieledPage("Customer Info",'3 of 3').buildPreferredSize(),
         body: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-               // image: AssetImage("images/onb_back.png"),
-                fit: BoxFit.cover,
-              ),
-            ),
 
             width: double.infinity,
             height: double.infinity,
@@ -87,28 +125,55 @@ final expirationMonth=TextEditingController();
                 Container(
                     alignment: Alignment.topLeft,
                     padding: EdgeInsets.only(left: 30,top: 8,bottom: 8),
-                    child: CustomText("Isseu Date", 15, 1.2, Colors.white)),
-           Row(
-             children: [
-               Expanded(child: UserInputTextField(issueDate,'Date')),
-               Expanded(child: UserInputTextField(issueMonth,'Month')),
-               Expanded(child: UserInputTextField(issueYear,'Year')),
+                    child: CustomText("Issue Date", 15, 1.2, Colors.black)),
 
-             ],
-           ),
-        Container(
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(4),
+                        border: Border.all(width: 1.0, color: Colors.black)
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        NumberList(getDate,generateNumberList(1,31),'Date',50),
+                        Text('/'),
+                        NumberList(getMonth,generateNumberList(1,12),'Month',50),
+                        Text('/'),
+                        NumberList(getYear,generateNumberList(2015,2021),'Year',50)
+                      ],
+                    ),
+                  ),
+                ),
+
+                Container(
             alignment: Alignment.topLeft,
             padding: EdgeInsets.only(left: 30,top: 8,bottom: 8),
 
-            child: CustomText("Expiration Date", 15, 1.2, Colors.white)),
-           Row(
-             children: [
-               Expanded(child: UserInputTextField(expirationDate,'Date')),
-               Expanded(child: UserInputTextField(expirationMonth,'Month')),
-               Expanded(child: UserInputTextField(expirationYear,'Year')),
+            child: CustomText("Expiration Date", 15, 1.2, Colors.black)),
 
-             ],
-           ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(4),
+                        border: Border.all(width: 1.0, color: Colors.black)
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        NumberList(getExDate,generateNumberList(1,31),'Date',50),
+                        Text('/'),
+                        NumberList(getExMonth,generateNumberList(1,12),'Month',50),
+                        Text('/'),
+                        NumberList(getExYear,generateNumberList(2021,2030),'Year',50)
+                      ],
+                    ),
+                  ),
+                ),
 
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
@@ -129,15 +194,23 @@ final expirationMonth=TextEditingController();
 
   }
 
+List<int> generateNumberList(start,end){
+  List<int> list=<int>[];
+  for(int i=start;i<=end;i++){
+    list.add(i);
+  }
+  return list;
+}
+
   createAccount() {
     this.customer.idNumber=idNumber.text;
     this.customer.documentName=documentName.text;
     this.customer.nameOnDocument=nameOnDocument.text;
     this.customer.issueAuthority=issueAuthority.text;
 
-    this.customer.issueDate= issueYear.text+ issueMonth.text+issueDate.text;
-    this.customer.expirationDate=expirationYear.text+ expirationMonth.text+expirationDate.text;
-
+    this.customer.issueDate= yearGDDOB.toString()+'-'+monthGDDOB.toString()+'-'+dateDGDOB.toString();
+    this.customer.expirationDate=yearEXDOB.toString()+'-'+monthEXDOB.toString()+'-'+dateEXDOB.toString();
+print(this.customer.toJson());
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context)=>CustomerCreateRevsion(this.customer)),

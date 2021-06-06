@@ -3,8 +3,10 @@
 class CommonData{
     //static final String baseUrl='10.0.19.60:8080';
     // static final String baseUrl='http://10.1.11.102:8080';
-    static final String baseUrl='http://192.168.43.228:8080';
+    //static final String baseUrl='http://192.168.43.228:8080';
+    // static final String baseUrl='http://192.168.0.102:8080';
     // static final String baseUrl='http://localhost:8080';
+     static final String baseUrl='http://192.168.1.3:8080';
     static UserData userData;
     static String userName;
     static String passWord;

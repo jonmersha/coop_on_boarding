@@ -69,14 +69,13 @@ class UserInputTextField extends StatelessWidget {
         height: 50.0,
           padding: const EdgeInsets.only(left: 10, bottom: 0),
         child: DecoratedBox(
-          decoration: const BoxDecoration(color: Colors.black45),
+          decoration: const BoxDecoration(color: Colors.white),
 
           child: TextFormField(
-              cursorColor: CustomColor.white,
+              cursorColor: CustomColor.black,
 
               style: TextStyle(
-
-                  color: Colors.white,
+                  color: Colors.black,
                   fontSize: 16.0
               ),
               controller: controller,
@@ -85,7 +84,7 @@ class UserInputTextField extends StatelessWidget {
               decoration: new InputDecoration(
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(4)),
-                  borderSide: BorderSide(width: 1,color: Colors.amber),
+                  borderSide: BorderSide(width: 1,color: CustomColor.cyan_blue),
                 ),
                 disabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(4)),
@@ -94,13 +93,13 @@ class UserInputTextField extends StatelessWidget {
 
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(4)),
-                  borderSide: BorderSide(width: 1,color: CustomColor.white),
+                  borderSide: BorderSide(width: 1,color: CustomColor.black),
 
                 ),
 
                 // icon: Icon(Icons.account_box,color: Colors.black),
                 labelText: hintText,
-                labelStyle: TextStyle(color: CustomColor.white),
+                labelStyle: TextStyle(color: CustomColor.black),
 
 
                 border: OutlineInputBorder(
