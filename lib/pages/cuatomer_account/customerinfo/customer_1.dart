@@ -216,7 +216,8 @@ class _BalanceEnquiryState extends State<CustomerCreateOne> {
 
 
 
-    customer.dob= this.yearDOB.toString() +'-'+this.monthDOB+'-'+this.dateDOB;
+    //customer.dob= this.yearDOB.toString() +'-'+this.monthDOB+'-'+this.dateDOB;
+    customer.dob= this.yearDOB.toString() +this.monthDOB+this.dateDOB;
 
     //print(customer.title+' '+customer.dob);
     //customer.dob= this.yearDOB.toString() +this.monthDOB.toString()+this.dateDOB.toString();

@@ -208,9 +208,14 @@ List<int> generateNumberList(start,end){
     this.customer.nameOnDocument=nameOnDocument.text;
     this.customer.issueAuthority=issueAuthority.text;
 
-    this.customer.issueDate= yearGDDOB.toString()+'-'+monthGDDOB.toString()+'-'+dateDGDOB.toString();
-    this.customer.expirationDate=yearEXDOB.toString()+'-'+monthEXDOB.toString()+'-'+dateEXDOB.toString();
-print(this.customer.toJson());
+    // this.customer.issueDate= yearGDDOB.toString()+'-'+monthGDDOB.toString()+'-'+dateDGDOB.toString();
+    // this.customer.expirationDate=yearEXDOB.toString()+'-'+monthEXDOB.toString()+'-'+dateEXDOB.toString();
+      this.customer.issueDate= yearGDDOB.toString()+monthGDDOB.toString()+dateDGDOB.toString();
+      this.customer.expirationDate=yearEXDOB.toString()+monthEXDOB.toString()+dateEXDOB.toString();
+
+
+
+    print(this.customer.toJson());
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context)=>CustomerCreateRevsion(this.customer)),

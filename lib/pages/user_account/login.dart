@@ -13,6 +13,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 import 'dart:convert';
 
+
 import '../../CommonDate.dart';
 import '../landing_page.dart';
 
@@ -25,6 +26,10 @@ class LoginScreenState extends State<LoginScreen>{
   //Future<SharedPreferences> _prefs = await SharedPreferences.getInstance();
     final   password=TextEditingController();
     final    userName=TextEditingController();
+    final    ipadd=TextEditingController();
+    //final    ip=TextEditingController();
+
+
     String mobileNumberSet;
     //final prefs =  SharedPreferences.getInstance();
     bool _loading = false;
@@ -33,6 +38,8 @@ class LoginScreenState extends State<LoginScreen>{
     //_getMobileNumber();
     this.userName.text=CommonData.userName;
     this.password.text='123joni';
+    this.ipadd.text=CommonData.baseUrl;
+    CommonData.baseUrl=this.ipadd.text;
 
   }
     _getMobileNumber() async{
@@ -69,10 +76,14 @@ class LoginScreenState extends State<LoginScreen>{
               padding: EdgeInsets.all(10.0),
               children: [
                 LogoText(),
-                if(this.userName.text.isEmpty)
+                Container(
+                  padding: EdgeInsets.all(10.0),
+                  child: EditTextForSingUp(ipadd,'Remote Address'),
+                ),
+                // if(this.userName.text.isEmpty)
                   Container(
                     padding: EdgeInsets.all(10.0),
-                    child: EditTextForSingUp(userName,'Please enter Mobile/emil Id'),
+                    child: EditTextForSingUp(userName,'Please enter Mobile/Email Id'),
                   ),
                 Container(
                   padding: EdgeInsets.all(10.0),
@@ -86,7 +97,7 @@ class LoginScreenState extends State<LoginScreen>{
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      // CustomRaisedButton('Create Account', gotoHomeScreen ),
+
                       CustomRaisedButton('  sign up  ', createUser),
                       CustomRaisedButton('       login       ', login),
                     ],
@@ -117,7 +128,7 @@ class LoginScreenState extends State<LoginScreen>{
 
 
   void login() async{
-
+    CommonData.baseUrl=this.ipadd.text;
     Methods.showLoaderDialog(context,'Login Wait...');
     final http.Response response = await http.post(
       Uri.parse(CommonData.baseUrl+'/officer/login'),
